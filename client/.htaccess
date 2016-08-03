@@ -3,4 +3,4 @@ RewriteBase /client/
 RewriteCond %{REQUEST_URI} !^(/index\.php|/img|/js|/css|/robots\.txt|/favicon\.ico)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /client/app/index.html
+RewriteRule . /client/index.html
