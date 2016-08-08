@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <base href="/client/app/">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <style>
     [ng-cloak] {
@@ -32,10 +33,14 @@
     // load all of the dependencies asynchronously.
     $script([
       'bower_components/angular-route/angular-route.min.js',
-      'controllers/view1.js',
-      'controllers/view2.js',
+      'bower_components/jquery/dist/jquery.min.js',
       'bower_components/angular-resource/angular-resource.min.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+      'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+      'bower_components/bootstrap/dist/js/bootstrap.min.js',
+      'bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js',
+      'bower_components/angular-loading-bar/build/loading-bar.min.js',
+      'controllers/UserController.js',
+      'controllers/IndexController.js'
     ], function() {
       // when all is done, execute bootstrap angular application
       angular.bootstrap(document, ['myApp']);
@@ -46,13 +51,22 @@
 </head>
 <body ng-cloak>
 
-  <ul class="menu">
-    <li><a href="/client/app/tests">view1</a></li>
-    <li><a href="/client/app/view2">view2</a></li>
-  </ul>
-
-  <div ng-view></div>
-
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/client/app/">Saho.dev</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/client/app/"><i class="glyphicon glyphicon-home"></i> Главная</a></li>
+        <li><a ui-sref="user"><i class="glyphicon glyphicon-user"></i> Пользователь</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id="main" class="container">
+    <div ncy-breadcrumb></div>
+    <!-- Здесь будет динамическое содержимое -->
+    <div ui-view></div>
+  </div>
 
 </body>
 </html>
