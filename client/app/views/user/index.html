@@ -1,2 +1,10 @@
-<h3> User </h3>
+<h3>User</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima.</p>
 <hr>
+<p>{{logined}}</p>
+
+<div ng-show="!logined" class="btn-group">
+    <a ng-href="user/register" class="btn btn-primary">Регистрация</a>
+    <a ng-href="user/login" class="btn btn-success">Авторизация</a>
+</div>
+

@@ -1,0 +1,23 @@
+<h2>Register</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet distinctio est fugiat modi officia porro quaerat
+    quam repudiandae vitae. Adipisci autem cum deleniti id labore magnam maiores quibusdam. Qui.</p>
+<hr>
+<div class="row">
+    <div class="col-xs-6">
+        <form class="control" ng-submit="register()">
+            <input type="text" class="form-control" ng-model="data.username" placeholder="name"><br>
+            <!--<input type="text" class="form-control" ng-model="data.email" placeholder="email"><br>-->
+            <!--<select class="form-control" style="width: 100px;" name="" id="" ng-model="data.sex">-->
+            <!--<option value="male">male</option>-->
+            <!--<option value="female">female</option>-->
+            <!--</select><br>-->
+            <input type="password" ng-model="data.password" class="form-control" placeholder="password"><br>
+            <input type="password" ng-model="data.cpassword" class="form-control" placeholder="repeat password"><br>
+            <input type="submit" value="Отправить" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+<br>
+<ul class="alert alert-danger" role="alert" ng-repeat="error in errors" style="list-style-type: none">
+    <li>{{error}}</li>
+</ul>
