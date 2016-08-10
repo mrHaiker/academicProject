@@ -118,4 +118,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->access_key == $authKey;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile() {
+        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
+    }
 }

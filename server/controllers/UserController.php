@@ -26,8 +26,9 @@ class UserController extends Controller
         $model = new RegisterForm();
 
         if($model->load(\Yii::$app->request->getBodyParams(), '') && $model->validate()) {
+            var_dump($model->username);
             if($model->register()) {
-                return 'User successfully register';
+                return $model->username . 'User successfully register';
             } else {
                 throw new ServerErrorHttpException('Register failed for unknown reason');
             }
@@ -41,21 +42,14 @@ class UserController extends Controller
      */
     public function actionLogin() {
         $model = new LoginForm();
-        if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->validate()) {
+        if ($model->load(\Yii::$app->getRequest()->getBodyParams(), '') && $model->validate()) {
             if($model->login()) {
-                return ['access_token' => Yii::$app->user->identity->getAuthKey()];
+                return ['access_token' => \Yii::$app->user->identity->getAuthKey()];
             }
         }
         return $model;
     }
 
-    /**
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return 'test';
-    }
     protected function verbs()
     {
         return [

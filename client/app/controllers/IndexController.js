@@ -6,6 +6,7 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/index.html'
     })
 })
-app.controller('IndexCtrl', function ($scope) {
-
+app.controller('MainCtrl', function ($scope, $window) {
+})
+app.controller('IndexCtrl', function ($scope, $window) {
 })

@@ -6,7 +6,8 @@ var serviceBase = 'http://saho.dev:3000/server/web/';
 var app = angular.module('myApp', [
   'ngRoute',
   'ngResource',
-  'angular-loading-bar'
+  'angular-loading-bar',
+  'file-model'
 ]);
 app.config(function($httpProvider, $routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);

@@ -13,6 +13,10 @@ app.factory('User', function ($resource) {
         login: {
             url: serviceBase+'user/login',
             method: 'POST'
+        },
+        edit: {
+            url: serviceBase+'identity/edit',
+            method: 'POST'
         }
     });
 });
