@@ -16,16 +16,21 @@ app.config(function($routeProvider) {
         })
 });
 
-app.controller('UserCtrl', function($scope, $window) {
-    $scope.logined = $window.localStorage.access_key ? true : false;
-    $scope.name = ($window.localStorage.username !== undefined) ? $window.localStorage.username : 'Гость'
+app.controller('UserCtrl', function($scope, $window, _authorized) {
+    $scope.login = _authorized.isLogin()
+    $scope.name = _authorized.getName()
+    $scope.logout = function () {
+        $window.localStorage.clear()
+        $window.location.reload()
+    }
 });
 app.controller('LoginCtrl', function($scope, User, $window, $location) {
     $scope.login = function () {
         User.login($scope.data, function (data, req) {
-            $window.localStorage.access_key = data.access_token;
-            $window.localStorage.username = $scope.data.username;
-            $location.path('/client/').replace();
+            $window.localStorage.access_key = data.access_token
+            $window.localStorage.username = $scope.data.username
+            $location.path('/client/app/')
+            $window.location.reload()
         })
     }
 });
@@ -52,3 +57,12 @@ app.controller('ProfileCtrl', function ($scope, User) {
         console.log($scope.avatarFile);
     }
 });
+app.controller('ProductCtrl', function ($scope, Product, $location) {
+    $scope.addNewElement = function () {
+        console.log($scope.item);
+        Product.create($scope.item, function (data, req) {
+            $location.path('/client/app/')
+            // $window.location.reload()
+        })
+    }
+})

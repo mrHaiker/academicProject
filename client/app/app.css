@@ -1,5 +1,9 @@
 /* app css stylesheet */
 
+body {
+  background: #eeeeee;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -28,3 +32,4 @@
   content: "";
   padding: 0;
 }
+

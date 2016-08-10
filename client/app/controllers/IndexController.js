@@ -6,7 +6,10 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/index.html'
     })
 })
-app.controller('MainCtrl', function ($scope, $window) {
+app.controller('MainCtrl', function ($scope, $window, _authorized, $route) {
 })
-app.controller('IndexCtrl', function ($scope, $window) {
+app.controller('IndexCtrl', function ($scope, $window, Product) {
+    Product.query(function (data) {
+        $scope.items = data;
+    })
 })

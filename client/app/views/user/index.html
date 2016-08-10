@@ -1,31 +1,65 @@
-<h3>{{name}}</h3>
+<h3>Hello, {{name}}
+    <span ng-if="login" class="btn btn-default pull-right" ng-click="logout()">Logout</span>
+</h3>
+
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima.</p>
-<hr>
-<div ng-show="!logined" class="btn-group">
+<div ng-if="!login" class="btn-group">
     <a ng-href="user/register" class="btn btn-primary">Регистрация</a>
     <a ng-href="user/login" class="btn btn-success">Авторизация</a>
 </div>
 
-<div ng-show="logined" class="profile" ng-controller="ProfileCtrl">
-    <div class="row">
-        <div class="col-sm-6">
-            <form class="control" ng-submit="edit()">
-                <input class="form-control" type="email" ng-model="data.email" placeholder="Email"><br>
-                <input class="form-control" type="text" ng-model="data.first_name" placeholder="First Name"><br>
-                <input class="form-control" type="text" ng-model="data.last_name" placeholder="Last Name"><br>
-                <input type="text" class="form-control" ng-model="data.phone_number" placeholder="Phone"><br>
-                <input type='file' file-model='avatarFile'><br>
-                <input type="submit" class="btn btn-default" value="Редактировать профиль">
-            </form>
-        </div>
-        <div class="col-sm-6">
-            <div class="thumbnail">
-                <img ng-src="{{avatar}}" alt="">
+<div ng-if="login" class="profile" ng-controller="ProfileCtrl">
+    <div ng-show="userDetails" class="thumbnail">
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="control" ng-submit="edit()">
+                    <input class="form-control" type="email" ng-model="data.email" placeholder="Email"><br>
+                    <input class="form-control" type="text" ng-model="data.first_name" placeholder="First Name"><br>
+                    <input class="form-control" type="text" ng-model="data.last_name" placeholder="Last Name"><br>
+                    <input type="text" class="form-control" ng-model="data.phone_number" placeholder="Phone"><br>
+                    <input type='file' file-model='avatarFile'><br>
+                    <input type="submit" class="btn btn-primary" value="Редактировать профиль">
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <div class="thumbnail">
+                    <img ng-src="{{avatar}}" alt="">
+                </div>
             </div>
         </div>
     </div>
     <hr>
-    {{data | json}}
+    <div class="btn btn-default" ng-click="userDetails = !userDetails">Редактировать личную информацию <i class="glyphicon glyphicon-chevron-down"></i></div>
+    <hr>
+
+    <div class="thumbnail" ng-show="addItem" ng-controller="ProductCtrl">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Add new item</h4>
+                <form class="control" ng-submit="addNewElement()">
+                    <input type="text" class="form-control" placeholder="Name" ng-model="item.name"><br>
+                    <textarea class="form-control" cols="10" rows="5" ng-model="item.description" placeholder="Description"></textarea><br>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <input type="number" class="form-control" placeholder="Price" ng-model="item.price"><br>
+                        </div>
+                        <div class="col-xs-6 col-sm-8">
+                            <b class="pull-right">{{item.price | currency}}</b>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Добавить">
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                </div>
+            </div>
+        </div>
+        {{item | json}}
+
+    </div>
+    <div class="btn btn-default" ng-click="addItem = !addItem">Добавить новый товар <i class="glyphicon glyphicon-plus"></i></div>
+    <hr>
 </div>
 
 
