@@ -24,6 +24,7 @@ app.controller('UserCtrl', function($scope, $window, _authorized) {
         $window.location.reload()
     }
 });
+
 app.controller('LoginCtrl', function($scope, User, $window, $location) {
     $scope.login = function () {
         User.login($scope.data, function (data, req) {
@@ -34,6 +35,7 @@ app.controller('LoginCtrl', function($scope, User, $window, $location) {
         })
     }
 });
+
 app.controller('RegisterCtrl', function($scope, User) {
     $scope.register = function () {
 
@@ -45,18 +47,33 @@ app.controller('RegisterCtrl', function($scope, User) {
         }
     }
 });
-app.controller('ProfileCtrl', function ($scope, User) {
-    $scope.avatar = 'http://juicypuzzles.ru/public/puzzles/8/6/86ead7934ae466683a176c2d43eb36ad2.jpg'
-    $scope.edit = function () {
-        console.log($scope.data);
-        User.edit($scope.data, function (data, req) {
-            console.log(data);
+
+app.controller('ProfileCtrl', function ($scope, Profile, $window, $location) {
+    $scope.data = {}
+    $scope.avatar = ''
+    $scope.test = 'test'
+    $scope.access_token = `{"Authorization": "Bearer ${$window.localStorage.access_key}"}`
+
+    $scope.getProfile = function () {
+        Profile.query(function (data) {
+            $scope.data = data[0]
+            $scope.avatar = `/server/web/images/avatars/${data[0].avatar}-mid.jpg`
         })
     }
-    $scope.upload = function () {
-        console.log($scope.avatarFile);
+    $scope.getProfile();
+    $scope.edit = function () {
+        Profile.edit($scope.data, function (data, req) {
+        })
     }
+    var upload = document.querySelector('vaadin-upload');
+    upload.addEventListener('upload-before', function(e) {
+        e.detail.file.uploadTarget = serviceBase + 'identity/upload';
+    });
+    upload.addEventListener('upload-success', function(e) {
+        $scope.getProfile();
+    });
 });
+
 app.controller('ProductCtrl', function ($scope, Product, $location) {
     $scope.addNewElement = function () {
         console.log($scope.item);

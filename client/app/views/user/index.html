@@ -1,3 +1,8 @@
+<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<!--<link rel="stylesheet" href="bower_components/vaadin-core-elements/vaadin-core-elements.html">-->
+<link href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-core-elements/vaadin-core-elements.html" rel="import">
+
+
 <h3>Hello, {{name}}
     <span ng-if="login" class="btn btn-default pull-right" ng-click="logout()">Logout</span>
 </h3>
@@ -17,8 +22,19 @@
                     <input class="form-control" type="text" ng-model="data.first_name" placeholder="First Name"><br>
                     <input class="form-control" type="text" ng-model="data.last_name" placeholder="Last Name"><br>
                     <input type="text" class="form-control" ng-model="data.phone_number" placeholder="Phone"><br>
-                    <input type='file' file-model='avatarFile'><br>
-                    <input type="submit" class="btn btn-primary" value="Редактировать профиль">
+
+                    <vaadin-upload
+                            max-files="1"
+                            method="POST"
+                            accept="image/*,video/*"
+                            headers={{access_token}}
+                            timeout=15000
+                    ></vaadin-upload>
+                    <br>
+                    <div class="wrap text-center">
+                        <input type="submit" class="btn btn-primary" value="Сохранить изменения">
+                    </div>
+                    <br>
                 </form>
             </div>
             <div class="col-sm-6">
@@ -55,12 +71,15 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+
+            </div>
+        </div>
         {{item | json}}
 
     </div>
     <div class="btn btn-default" ng-click="addItem = !addItem">Добавить новый товар <i class="glyphicon glyphicon-plus"></i></div>
     <hr>
 </div>
-
-
-

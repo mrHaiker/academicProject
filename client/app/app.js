@@ -7,7 +7,8 @@ var app = angular.module('myApp', [
   'ngRoute',
   'ngResource',
   'angular-loading-bar',
-  'file-model'
+  'file-model',
+  'ngAnimate'
 ]);
 app.config(function($httpProvider, $routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);

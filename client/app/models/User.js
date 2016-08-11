@@ -3,7 +3,7 @@
  */
 
 app.factory('User', function ($resource) {
-    return $resource(serviceBase+'user/register', {
+    return $resource(serviceBase+'user', {
 
     }, {
         register: {
@@ -12,10 +12,6 @@ app.factory('User', function ($resource) {
         },
         login: {
             url: serviceBase+'user/login',
-            method: 'POST'
-        },
-        edit: {
-            url: serviceBase+'identity/edit',
             method: 'POST'
         }
     });
