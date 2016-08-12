@@ -17,6 +17,7 @@ app.config(function($routeProvider) {
 });
 
 app.controller('UserCtrl', function($scope, $window, _authorized) {
+    $scope.access_token = `{"Authorization": "Bearer ${$window.localStorage.access_key}"}`
     $scope.login = _authorized.isLogin()
     $scope.name = _authorized.getName()
     $scope.logout = function () {
@@ -47,39 +48,3 @@ app.controller('RegisterCtrl', function($scope, User) {
         }
     }
 });
-
-app.controller('ProfileCtrl', function ($scope, Profile, $window, $location) {
-    $scope.data = {}
-    $scope.avatar = ''
-    $scope.test = 'test'
-    $scope.access_token = `{"Authorization": "Bearer ${$window.localStorage.access_key}"}`
-
-    $scope.getProfile = function () {
-        Profile.query(function (data) {
-            $scope.data = data[0]
-            $scope.avatar = `/server/web/images/avatars/${data[0].avatar}-mid.jpg`
-        })
-    }
-    $scope.getProfile();
-    $scope.edit = function () {
-        Profile.edit($scope.data, function (data, req) {
-        })
-    }
-    var upload = document.querySelector('vaadin-upload');
-    upload.addEventListener('upload-before', function(e) {
-        e.detail.file.uploadTarget = serviceBase + 'identity/upload';
-    });
-    upload.addEventListener('upload-success', function(e) {
-        $scope.getProfile();
-    });
-});
-
-app.controller('ProductCtrl', function ($scope, Product, $location) {
-    $scope.addNewElement = function () {
-        console.log($scope.item);
-        Product.create($scope.item, function (data, req) {
-            $location.path('/client/app/')
-            // $window.location.reload()
-        })
-    }
-})

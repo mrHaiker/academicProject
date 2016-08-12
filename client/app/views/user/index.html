@@ -2,7 +2,6 @@
 <!--<link rel="stylesheet" href="bower_components/vaadin-core-elements/vaadin-core-elements.html">-->
 <link href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-core-elements/vaadin-core-elements.html" rel="import">
 
-
 <h3>Hello, {{name}}
     <span ng-if="login" class="btn btn-default pull-right" ng-click="logout()">Logout</span>
 </h3>
@@ -23,7 +22,7 @@
                     <input class="form-control" type="text" ng-model="data.last_name" placeholder="Last Name"><br>
                     <input type="text" class="form-control" ng-model="data.phone_number" placeholder="Phone"><br>
 
-                    <vaadin-upload
+                    <vaadin-upload id="profile-upload"
                             max-files="1"
                             method="POST"
                             accept="image/*,video/*"
@@ -48,38 +47,57 @@
     <div class="btn btn-default" ng-click="userDetails = !userDetails">Редактировать личную информацию <i class="glyphicon glyphicon-chevron-down"></i></div>
     <hr>
 
-    <div class="thumbnail" ng-show="addItem" ng-controller="ProductCtrl">
-        <div class="row">
-            <div class="col-sm-6">
-                <h4>Add new item</h4>
-                <form class="control" ng-submit="addNewElement()">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="item.name"><br>
-                    <textarea class="form-control" cols="10" rows="5" ng-model="item.description" placeholder="Description"></textarea><br>
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-4">
-                            <input type="number" class="form-control" placeholder="Price" ng-model="item.price"><br>
+    <div ng-controller="ProductCtrl">
+        <div class="thumbnail" ng-show="addNewItem" >
+            <div class="row">
+                <div class="col-sm-12" ng-show="!addPhotography">
+                    <h4>Add new item</h4>
+                    <form class="control" ng-submit="addNewElement()">
+                        <input type="text" class="form-control" placeholder="Name" ng-model="item.name"><br>
+                        <textarea class="form-control" cols="10" rows="5" ng-model="item.description" placeholder="Description"></textarea><br>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <input type="number" class="form-control" placeholder="Price" ng-model="item.price"><br>
+                            </div>
+                            <div class="col-xs-6 col-sm-8">
+                                <b class="pull-right">{{item.price | currency}}</b>
+                            </div>
                         </div>
-                        <div class="col-xs-6 col-sm-8">
-                            <b class="pull-right">{{item.price | currency}}</b>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="Добавить">
-                </form>
-            </div>
-            <div class="col-sm-6">
-                <div class="row">
+                        <input type="submit" class="btn btn-primary" value="Добавить">
+                    </form>
                 </div>
             </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-12">
-
+            <div ng-show="addPhotography">
+                <div class="col-sm-6">
+                    <h3>{{item.name}}</h3>
+                    <p>{{item.description}}</p>
+                    <p><b>{{item.price}}</b></p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="pull-right">
+                            <div class="preview thumbnail" ng-if="preview">
+                                <img ng-src="{{preview}}" alt="preview">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-sm-12">
+                        <hr>
+                        <vaadin-upload id="product-upload"
+                                       max-files="1"
+                                       method="POST"
+                                       accept="image/*,video/*"
+                                       headers={{access_token}}
+                                       timeout=15000
+                        ></vaadin-upload>
+                    </div>
+                </div>
             </div>
-        </div>
-        {{item | json}}
 
+        </div>
+        <div class="btn btn-default" ng-click="addItem()">Добавить новый товар <i class="glyphicon glyphicon-plus"></i></div>
+        <hr>
     </div>
-    <div class="btn btn-default" ng-click="addItem = !addItem">Добавить новый товар <i class="glyphicon glyphicon-plus"></i></div>
-    <hr>
 </div>

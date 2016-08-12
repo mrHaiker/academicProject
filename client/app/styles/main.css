@@ -1,0 +1,29 @@
+.preview img {
+    max-height: 130px;
+}
+#meta.vaadin-upload-file {
+    padding-left: 10px;
+}
+#name.vaadin-upload-file {
+    /*padding-left: 10px;*/
+}
+#status.vaadin-upload-file {
+    /*padding-left: 10px;*/
+}
+#row.vaadin-upload-file {
+    padding-left: 10px;
+}
+.vaadin-upload-file-0 iron-icon.vaadin-upload-file {
+    margin-right: -33px;
+}
+.vaadin-upload-file-0 #meta[error].vaadin-upload-file {
+    padding-left: 0;
+}
+.index-product-image {
+}
+.index-price--prod {
+
+}
+.pagination a {
+    cursor: pointer;
+}

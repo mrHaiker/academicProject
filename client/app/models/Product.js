@@ -3,7 +3,7 @@
  */
 
 app.factory('Product', function ($resource) {
-    return $resource(serviceBase+'product', {
+    return $resource(serviceBase+'products', {
 
     }, {
         create: {

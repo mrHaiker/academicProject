@@ -14,5 +14,5 @@ app.config(function($httpProvider, $routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
   $httpProvider.interceptors.push('AuthInterceptor');
-  $routeProvider.otherwise('/');
+  $routeProvider.otherwise('/1');
 });
