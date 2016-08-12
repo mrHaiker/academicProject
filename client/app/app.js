@@ -1,6 +1,6 @@
 'use strict';
 
-var serviceBase = 'http://saho.dev:3000/server/web/';
+var serviceBase = 'http://saho.hopto.org/server/web/';
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [

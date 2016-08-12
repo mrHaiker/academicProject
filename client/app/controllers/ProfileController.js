@@ -1,10 +1,11 @@
 /**
  * Created by Sergey on 12.08.2016.
  */
-app.controller('ProfileCtrl', function ($scope, Profile, $timeout) {
+app.controller('ProfileCtrl', function ($scope, Profile) {
     $scope.data = {}
     $scope.avatar = ''
     $scope.test = 'test'
+    $scope.userDetails = false
 
     $scope.getProfile = function () {
         Profile.query(function (data) {
@@ -16,18 +17,11 @@ app.controller('ProfileCtrl', function ($scope, Profile, $timeout) {
     $scope.edit = function () {
         Profile.edit($scope.data, function () {})
     }
-    $scope.userDetails = function () {
-        $scope.openDetails = true;
-        $timeout(function () {
-            var upload = document.getElementById('profile-upload');
-            upload.addEventListener('upload-before', function(e) {
-                e.detail.file.uploadTarget = serviceBase + 'identity/upload';
-            });
-            upload.addEventListener('upload-success', function() {
-                $scope.getProfile();
-            });
-        },100)
-
-    }
-
+    var upload = document.getElementById('profile-upload');
+    upload.addEventListener('upload-before', function(e) {
+        e.detail.file.uploadTarget = serviceBase + 'identity/upload';
+    });
+    upload.addEventListener('upload-success', function() {
+        $scope.getProfile();
+    });
 });

@@ -8,16 +8,16 @@ app.config(function ($routeProvider) {
 })
 app.controller('MainCtrl', function ($scope, $window, _authorized, $route) {
 })
-app.controller('IndexCtrl', function ($scope, $window, Product, $routeParams, $resource) {
+app.controller('IndexCtrl', function ($scope, $window, Product, $routeParams) {
     $scope.current = $routeParams.page;
     $scope.totalPage = 5;
 
     $scope.loadPage = function (page) {
-        Product.query({page: page},function (data) {
+        Product.query({page: page},function (data, req) {
             $scope.items = data;
+            console.log(data);
         })
     }
-
 
     $scope.loadPage($scope.current || 1);
 
